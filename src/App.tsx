@@ -1,13 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { AddCategoryForm } from './components/AddCategoryForm';
+import { CategoryCardList } from './components/CategoryCardList';
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className="App flex mt-5">
+      <CategoryCardList />
+      <AddCategoryForm />
     </div>
   );
 }
