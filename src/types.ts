@@ -1,6 +1,6 @@
 export type Todo = {
-  id: string
-  categoryId: string
+  id: number
+  categoryId: number
   name: string
   isEdit: boolean
   isComplete: boolean

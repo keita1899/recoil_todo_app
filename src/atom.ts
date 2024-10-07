@@ -1,4 +1,4 @@
-import { atom, atomFamily } from "recoil"
+import { atom } from "recoil"
 import { Category, Todo } from "./types"
 
 export const categoriesState = atom<Category[]>({
@@ -8,7 +8,7 @@ export const categoriesState = atom<Category[]>({
   ]
 })
 
-export const todosState = atomFamily<Todo[], string>({
+export const todosState = atom<Todo[]>({
   key: 'todosState',
   default: []
 })
