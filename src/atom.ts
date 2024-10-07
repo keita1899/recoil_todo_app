@@ -3,9 +3,7 @@ import { Category, Todo } from "./types"
 
 export const categoriesState = atom<Category[]>({
   key: 'categorieState',
-  default: [
-
-  ]
+  default: []
 })
 
 export const todosState = atom<Todo[]>({
