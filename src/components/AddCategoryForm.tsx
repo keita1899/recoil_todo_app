@@ -14,6 +14,7 @@ export const AddCategoryForm = () => {
     const newCategory: Category = {
       id: Date.now(),
       title: newCategoryTitle,
+      isEdit: false,
     };
 
     setCategories((oldCategories) => [...oldCategories, newCategory]);
