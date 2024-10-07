@@ -33,6 +33,23 @@ export const CategoryCard = ({category, onDeleteCategory, onEditToggleCategory, 
     )
   }
 
+  const editTodoToggle = (id: number) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isEdit: !todo.isEdit } : todo
+      )
+    )
+  }
+
+  const updateTodoName = (e: React.FormEvent<HTMLFormElement>, id: number, name: string) => {
+    e.preventDefault()
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, name: name, isEdit: !todo.isEdit } : todo
+      )
+    )
+  }
+
   return (
     <div className="bg-white shadow-lg rounded-lg p-4 w-100">
       {category.isEdit ? 
@@ -40,9 +57,9 @@ export const CategoryCard = ({category, onDeleteCategory, onEditToggleCategory, 
       : 
         <CategoryCardHeading category={category} onDeleteCategory={onDeleteCategory} onEditToggleCategory={onEditToggleCategory} />
       }
-      <TodoList todos={uncompletedTodos} onDeleteTodo={deleteTodo} onCompleteToggle={completeToggle} />
+      <TodoList todos={uncompletedTodos} onDeleteTodo={deleteTodo} onCompleteToggle={completeToggle} onEditTodoToggle={editTodoToggle} onUpdateTodoName={updateTodoName} />
       <AddTodoForm categoryId={category.id} />
-      <TodoList todos={completedTodos} onDeleteTodo={deleteTodo} onCompleteToggle={completeToggle} />
+      <TodoList todos={completedTodos} onDeleteTodo={deleteTodo} onCompleteToggle={completeToggle} onEditTodoToggle={editTodoToggle} onUpdateTodoName={updateTodoName} />
     </div>
   )
 }
