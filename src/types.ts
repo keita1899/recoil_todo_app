@@ -9,4 +9,5 @@ export type Todo = {
 export type Category = {
   id: number
   title: string
+  isEdit: boolean
 }
