@@ -1,10 +1,40 @@
-export const AddTodoForm = () => {
+import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { todosState } from "../atom";
+
+type AddTodoFormProps = {
+  categoryId: number 
+}
+
+export const AddTodoForm = ({categoryId}: AddTodoFormProps) => {
+  const [newTodoName, setTodoName] = useState('')
+  const setTodos = useSetRecoilState(todosState);
+
+  const addTodo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (newTodoName.trim() === '') return
+
+    const newTodo = {
+      id: Date.now(),
+      name: newTodoName,
+      isEdit: false,
+      isComplete: false,
+      categoryId: categoryId
+    }
+
+    setTodos((oldTodos) => [...oldTodos, newTodo])
+
+    setTodoName('')
+  }
+
   return (
-    <form className="mt-2">
+    <form className="mt-2" onSubmit={addTodo}>
       <input
         type="text"
         className="border rounded-lg p-2 w-full"
-        placeholder="新しいTODO"
+        placeholder="新しいTodo"
+        value={newTodoName}
+        onChange={(e) => setTodoName(e.target.value)}
       />
       <input
         type="submit"
