@@ -12,8 +12,8 @@ type CategoryCardProps = {
 export const CategoryCard = ({category, onDeleteCategory}: CategoryCardProps) => {
   const [todos, setTodos] = useRecoilState(todosState)
   const filteredTodos = todos.filter((todo) => todo.categoryId === category.id)
-  const completedTodos = filteredTodos.filter((todo) => !todo.isComplete)
-  const uncompletedTodos = filteredTodos.filter((todo) => todo.isComplete)
+  const completedTodos = filteredTodos.filter((todo) => todo.isComplete)
+  const uncompletedTodos = filteredTodos.filter((todo) => !todo.isComplete)
 
   const deleteTodo = (id: number) => {
     setTodos((oldTodos) =>
@@ -40,9 +40,9 @@ export const CategoryCard = ({category, onDeleteCategory}: CategoryCardProps) =>
           削除
         </button>
       </div>
-      <TodoList todos={completedTodos} onDeleteTodo={deleteTodo} onCompleteToggle={completeToggle} />
-      <AddTodoForm categoryId={category.id} />
       <TodoList todos={uncompletedTodos} onDeleteTodo={deleteTodo} onCompleteToggle={completeToggle} />
+      <AddTodoForm categoryId={category.id} />
+      <TodoList todos={completedTodos} onDeleteTodo={deleteTodo} onCompleteToggle={completeToggle} />
     </div>
   )
 }

@@ -10,8 +10,3 @@ export const todosState = atom<Todo[]>({
   key: 'todosState',
   default: []
 })
-
-export const completedTodosState = atom<Todo[]>({
-  key: 'completedTodosState',
-  default: []
-})
