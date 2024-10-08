@@ -1,4 +1,7 @@
+import { useSortable } from "@dnd-kit/sortable"
 import { Todo } from "../types"
+import { CSS } from "@dnd-kit/utilities"
+import React from "react"
 
 type TodoProps = {
   todo: Todo
@@ -8,8 +11,17 @@ type TodoProps = {
 }
 
 export const TodoItem = ({todo, onDeleteTodo, onCompleteToggle, onEditTodoToggle}: TodoProps) => {
+  const { attributes, setNodeRef, listeners, transform, transition} = useSortable({
+    id: todo.id
+  })
+
+  const style = React.useMemo(() => ({
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }), [transform, transition])
+
   return (
-    <li className="p-3 mb-2 bg-white rounded-lg shadow-sm border border-gray-300 flex justify-between items-center">
+    <li ref={setNodeRef} style={style} {...attributes} {...listeners} className="p-3 mb-2 bg-white rounded-lg shadow-sm border border-gray-300 flex justify-between items-center">
       <input
         type="checkbox"
         checked={todo.isComplete}
