@@ -8,6 +8,8 @@ export const CategoryCardList = () => {
   const [categories, setCategories] = useRecoilState(categoriesState)
   const setTodos = useSetRecoilState(todosState)
 
+  const categoryIds = categories.map((category) => category.id)
+
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10,
@@ -61,7 +63,7 @@ export const CategoryCardList = () => {
       collisionDetection={closestCenter}
       onDragEnd={handleCategoryDragEnd}
     >
-      <SortableContext items={categories} strategy={horizontalListSortingStrategy}>
+      <SortableContext items={categoryIds} strategy={horizontalListSortingStrategy}>
         <div className="flex space-x-4 p-4">
           {categories.map((category) => (
             <CategoryCard key={category.id} category={category} onDeleteCategory={deleteCategory} onEditToggleCategory={editToggleCategory} onUpdateCategoryTitle={updateCategoryTitle} />

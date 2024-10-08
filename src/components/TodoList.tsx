@@ -17,6 +17,8 @@ type TodoListProps = {
 export const TodoList = ({todos, onDeleteTodo, onCompleteToggle, onEditTodoToggle, onUpdateTodoName}: TodoListProps) => {
   const setTodos = useSetRecoilState(todosState)
 
+  const todoIds = todos.map((todo) => todo.id)
+
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10,
@@ -40,7 +42,7 @@ export const TodoList = ({todos, onDeleteTodo, onCompleteToggle, onEditTodoToggl
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleTodoDragEnd}>
-      <SortableContext items={todos} strategy={verticalListSortingStrategy}>
+      <SortableContext items={todoIds} strategy={verticalListSortingStrategy}>
         <ul className="mt-4">
           {todos.map((todo: Todo) => 
             todo.isEdit ? 
