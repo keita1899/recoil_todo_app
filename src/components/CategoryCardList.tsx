@@ -1,7 +1,7 @@
 import { useRecoilState, useSetRecoilState } from "recoil"
 import { categoriesState, todosState } from "../atom"
 import { CategoryCard } from "./CategoryCard"
-import { closestCenter, DndContext, MouseSensor, useSensor, useSensors } from "@dnd-kit/core"
+import { closestCenter, DndContext, DragEndEvent, MouseSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { arrayMove, horizontalListSortingStrategy, SortableContext } from "@dnd-kit/sortable"
 
 export const CategoryCardList = () => {
@@ -46,9 +46,9 @@ export const CategoryCardList = () => {
     )
   }
 
-  const handleCategoryDragEnd = (event: any) => {
+  const handleCategoryDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
-    if (active.id !== over.id) {
+    if (over && active.id !== over.id) {
       setCategories((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);

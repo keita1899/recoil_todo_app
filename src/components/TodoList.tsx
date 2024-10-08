@@ -2,7 +2,7 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-ki
 import { Todo } from "../types"
 import { EditTodoNameForm } from "./EditTodoNameForm"
 import { TodoItem } from "./TodoItem"
-import { closestCenter, DndContext, MouseSensor, useSensor, useSensors } from "@dnd-kit/core"
+import { closestCenter, DndContext, DragEndEvent, MouseSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { useSetRecoilState } from "recoil"
 import { todosState } from "../atom"
 
@@ -29,9 +29,9 @@ export const TodoList = ({todos, onDeleteTodo, onCompleteToggle, onEditTodoToggl
     mouseSensor,
   )
 
-  const handleTodoDragEnd = (event: any) => {
+  const handleTodoDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
-    if (active.id !== over.id) {
+    if (over && active.id !== over.id) {
       setTodos((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);
