@@ -12,6 +12,7 @@ export const CategoryCardHeading = ({category, onDeleteCategory, onEditToggleCat
       <h3 onDoubleClick={() => onEditToggleCategory(category.id)} className="font-bold text-lg">{category.title}</h3>
       <button 
         onClick={() => onDeleteCategory(category.id)}
+        data-dndkit-disabled-dnd-flag="true"
         className="text-red-500 hover:text-red-700 ml-4"
       >
         削除

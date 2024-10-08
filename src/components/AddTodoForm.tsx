@@ -35,11 +35,13 @@ export const AddTodoForm = ({categoryId}: AddTodoFormProps) => {
         placeholder="新しいTodo"
         value={newTodoName}
         onChange={(e) => setTodoName(e.target.value)}
+        data-dndkit-disabled-dnd-flag="true"
       />
       <input
         type="submit"
         value="追加"
         className="bg-green-500 text-white rounded-lg p-2 mt-2 cursor-pointer"
+        data-dndkit-disabled-dnd-flag="true"
       />
     </form>
   );

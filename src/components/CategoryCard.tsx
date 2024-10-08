@@ -5,6 +5,8 @@ import { AddTodoForm } from "./AddTodoForm"
 import { TodoList } from "./TodoList"
 import { CategoryCardHeading } from "./CategoryCardHeading"
 import { EditCategoryForm } from "./EditCategoryForm"
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 type CategoryCardProps = {
   category: Category
@@ -18,6 +20,12 @@ export const CategoryCard = ({category, onDeleteCategory, onEditToggleCategory, 
   const filteredTodos = todos.filter((todo) => todo.categoryId === category.id)
   const completedTodos = filteredTodos.filter((todo) => todo.isComplete)
   const uncompletedTodos = filteredTodos.filter((todo) => !todo.isComplete)
+  const { attributes, listeners, setNodeRef, transform, transition} = useSortable({id: category.id})
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   const deleteTodo = (id: number) => {
     setTodos((oldTodos) =>
@@ -51,7 +59,7 @@ export const CategoryCard = ({category, onDeleteCategory, onEditToggleCategory, 
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4 w-100">
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="bg-white shadow-lg rounded-lg p-4 w-100">
       {category.isEdit ? 
         <EditCategoryForm id={category.id} title={category.title} onUpdateCategoryTitle={onUpdateCategoryTitle}/>
       : 
