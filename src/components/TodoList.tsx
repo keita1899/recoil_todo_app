@@ -46,7 +46,7 @@ export const TodoList = ({todos, onDeleteTodo, onCompleteToggle, onEditTodoToggl
         <ul className="mt-4">
           {todos.map((todo: Todo) => 
             todo.isEdit ? 
-              <EditTodoNameForm id={todo.id} name={todo.name} onUpdateTodoName={onUpdateTodoName} />
+              <EditTodoNameForm key={todo.id} id={todo.id} name={todo.name} onUpdateTodoName={onUpdateTodoName} />
             :
               <TodoItem key={todo.id} todo={todo} onDeleteTodo={onDeleteTodo} onCompleteToggle={onCompleteToggle} onEditTodoToggle={onEditTodoToggle} />
           )}
