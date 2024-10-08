@@ -7,6 +7,7 @@ import { CategoryCardHeading } from "./CategoryCardHeading"
 import { EditCategoryForm } from "./EditCategoryForm"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import React from "react"
 
 type CategoryCardProps = {
   category: Category
@@ -22,10 +23,10 @@ export const CategoryCard = ({category, onDeleteCategory, onEditToggleCategory, 
   const uncompletedTodos = filteredTodos.filter((todo) => !todo.isComplete)
   const { attributes, listeners, setNodeRef, transform, transition} = useSortable({id: category.id})
 
-  const style = {
+  const style = React.useMemo(() => ({
     transform: CSS.Transform.toString(transform),
     transition,
-  };
+  }), [transform, transition])
 
   const deleteTodo = (id: number) => {
     setTodos((oldTodos) =>

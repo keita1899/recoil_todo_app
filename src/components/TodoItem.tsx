@@ -1,6 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { Todo } from "../types"
 import { CSS } from "@dnd-kit/utilities"
+import React from "react"
 
 type TodoProps = {
   todo: Todo
@@ -14,10 +15,10 @@ export const TodoItem = ({todo, onDeleteTodo, onCompleteToggle, onEditTodoToggle
     id: todo.id
   })
 
-  const style = {
+  const style = React.useMemo(() => ({
     transform: CSS.Transform.toString(transform),
     transition,
-  }
+  }), [transform, transition])
 
   return (
     <li ref={setNodeRef} style={style} {...attributes} {...listeners} className="p-3 mb-2 bg-white rounded-lg shadow-sm border border-gray-300 flex justify-between items-center">
